@@ -31,7 +31,6 @@
       .buttons{flex-direction:column;align-items:flex-start}
       header{flex-direction:column;align-items:flex-start;gap:1rem}
     }
-    /* Simple modal */
     #auth-modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:1000;}
     #auth-box{background:#111;padding:2rem 2.5rem;border-radius:12px;max-width:350px;width:90%;}
     #auth-box h2{margin-bottom:1.5rem;text-align:center;}
@@ -63,7 +62,7 @@
     <h1>Options made simple.<br>Wealth made possible.</h1>
     <p>Unlock easy-to-use screeners, trade tracking, and step-by-step guides. Learn how selling options can grow your confidence and your portfolio—no experience required.</p>
     <div class="buttons">
-      <button class="primary">Join now</button>
+      <button id="join-btn" class="primary">Join now</button>
       <button class="secondary">How it works</button>
     </div>
   </section>
@@ -92,12 +91,26 @@
   <!-- ========  JS  ========= -->
   <script>
     /* ----------  Modal open/close  ---------- */
-    const modal   = document.getElementById('auth-modal');
-    const openBtn = document.getElementById('login-btn');
-    const closeBtn= document.getElementById('close-modal');
-    openBtn.onclick = () => modal.style.display = 'flex';
-    closeBtn.onclick= () => modal.style.display = 'none';
-    window.onclick  = e => { if (e.target === modal) modal.style.display='none'; };
+    const modal    = document.getElementById('auth-modal');
+    const openBtn  = document.getElementById('login-btn');
+    const joinBtn  = document.getElementById('join-btn');
+    const closeBtn = document.getElementById('close-modal');
+
+    openBtn.onclick = () => {
+      document.querySelector('#auth-box h2').textContent = 'Sign in to ThetaFlowz';
+      modal.style.display = 'flex';
+    };
+
+    joinBtn.onclick = () => {
+      document.querySelector('#auth-box h2').textContent = 'Create your ThetaFlowz account';
+      modal.style.display = 'flex';
+    };
+
+    closeBtn.onclick = () => modal.style.display = 'none';
+
+    window.onclick = e => {
+      if (e.target === modal) modal.style.display = 'none';
+    };
 
     /* ----------  Auth0 setup  ---------- */
     (async () => {
