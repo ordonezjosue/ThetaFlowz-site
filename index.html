@@ -1,69 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThetaFlowz</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f4f4;
-            color: #333;
-        }
-        .banner {
-            width: 100%;
-            height: 30vh; /* Adjust height as needed */
-            object-fit: cover;
-            display: block;
-        }
-        header {
-            background: #0f4c81;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        section {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #eee;
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ThetaFlowz</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .cta-button {
+      background-color: #b0ff4b;
+      color: black;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 3rem 2rem;
+      text-align: left;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: #ccc;
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .primary {
+      background-color: #71f54a;
+      color: black;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .image-strip {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 2rem;
+      justify-content: center;
+    }
+
+    .image-strip img {
+      width: 200px;
+      border-radius: 12px;
+    }
+
+    footer {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #aaa;
+      padding: 1rem 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<img src="banner.jpg" alt="ThetaFlowz Banner" class="banner" />
+<header>
+  <div class="logo">🔷 Dataway</div>
+  <nav>
+    <ul>
+      <li><a href="#">Tools</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+  </nav>
+  <button class="cta-button">Sign up</button>
+</header>
 
-<section>
-    <div class="card">
-        <h2>Track Performance</h2>
-        <p>Monitor trade outcomes, calculate P/L, and keep logs of your strategy metrics.</p>
-    </div>
-    <div class="card">
-        <h2>Learn Trading Techniques</h2>
-        <p>Explore backtested strategies, futures options, and educational resources.</p>
-    </div>
-    <div class="card">
-        <h2>Grow with the Community</h2>
-        <p>Coming soon: forums, premium content, and mentorship opportunities.</p>
-    </div>
+<section class="hero">
+  <h1>Options made simple.<br>Wealth made possible.</h1>
+  <p>
+    Unlock easy-to-use screeners, trade tracking, and step-by-step guides. Learn how selling options can grow your confidence and your portfolio—no experience required.
+  </p>
+  <div class="buttons">
+    <button class="primary">Join now</button>
+    <button class="secondary">How it works</button>
+  </div>
+</section>
+
+<section class="image-strip">
+  <img src="https://via.placeholder.com/200x120?text=Chart" alt="Chart"/>
+  <img src="https://via.placeholder.com/200x120?text=Trading" alt="Trading"/>
+  <img src="https://via.placeholder.com/200x120?text=Team" alt="Team"/>
+  <img src="https://via.placeholder.com/200x120?text=Coffee" alt="Coffee"/>
+  <img src="https://via.placeholder.com/200x120?text=Dashboard" alt="Dashboard"/>
 </section>
 
 <footer>
-    &copy; 2025 ThetaFlowz. All rights reserved.
+  Made by ThetaFlowz • Powered by HTML
 </footer>
 
 </body>
