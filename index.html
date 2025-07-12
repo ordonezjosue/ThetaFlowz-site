@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ThetaFlowz</title>
 
-  <!-- ========  CSS  ========= -->
   <style>
     :root {
       --brand: #71f54a;
@@ -37,13 +36,10 @@
     #close-modal{position:absolute;top:1rem;right:1rem;font-size:1.2rem;background:none;border:none;color:#fff;cursor:pointer;}
   </style>
 
-  <!-- ========  Auth0 SDK  ========= -->
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.7/auth0-spa-js.production.js"></script>
 </head>
 
 <body>
-
-  <!-- ----------  NAV  ---------- -->
   <header>
     <div class="logo">🔥 ThetaFlowz</div>
     <nav>
@@ -57,7 +53,6 @@
     <button id="login-btn" class="cta-button">Log in</button>
   </header>
 
-  <!-- ----------  HERO  ---------- -->
   <section class="hero">
     <h1>Options made simple.<br>Wealth made possible.</h1>
     <p>Unlock easy-to-use screeners, trade tracking, and step-by-step guides. Learn how selling options can grow your confidence and your portfolio—no experience required.</p>
@@ -67,7 +62,6 @@
     </div>
   </section>
 
-  <!-- ----------  IMAGE STRIP  ---------- -->
   <section class="image-strip">
     <img src="img1.png" alt="Chart">
     <img src="img2.png" alt="Trading">
@@ -78,7 +72,6 @@
 
   <footer>Made by ThetaFlowz</footer>
 
-  <!-- ----------  LOGIN MODAL  ---------- -->
   <div id="auth-modal">
     <div id="auth-box">
       <button id="close-modal">✕</button>
@@ -88,9 +81,7 @@
     </div>
   </div>
 
-  <!-- ========  JS  ========= -->
   <script>
-    /* ----------  Modal open/close  ---------- */
     const modal    = document.getElementById('auth-modal');
     const openBtn  = document.getElementById('login-btn');
     const joinBtn  = document.getElementById('join-btn');
@@ -112,38 +103,39 @@
       if (e.target === modal) modal.style.display = 'none';
     };
 
-    /* ----------  Auth0 setup  ---------- */
     (async () => {
       const auth0 = await createAuth0Client({
-        domain:   import.meta.env ? import.meta.env.VITE_AUTH0_DOMAIN   : '%AUTH0_DOMAIN%',
-        clientId: import.meta.env ? import.meta.env.VITE_AUTH0_CLIENTID : '%AUTH0_CLIENTID%',
-        authorizationParams: { redirect_uri: window.location.origin }
+        domain: 'dev-x3psku6vr1bv763.us.auth0.com',
+        clientId: '648872271545-ld7l0dpehv71dj36bg00hfapv6mbk1.apps.googleusercontent.com',
+        authorizationParams: {
+          redirect_uri: window.location.origin
+        }
       });
 
-      // Handle redirect from Auth0
       if (window.location.search.includes('code=')) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, '/');
       }
 
-      // Update UI helpers
       const loginUI  = () => {
         document.getElementById('auth-login').style.display  ='none';
         document.getElementById('auth-logout').style.display ='block';
         openBtn.textContent = 'Dashboard';
       };
+
       const logoutUI = () => {
         document.getElementById('auth-login').style.display  ='block';
         document.getElementById('auth-logout').style.display ='none';
         openBtn.textContent = 'Log in';
       };
 
-      // Check auth state
       if (await auth0.isAuthenticated()) loginUI(); else logoutUI();
 
-      // Bind buttons
-      document.getElementById('auth-login').onclick  = () => auth0.loginWithRedirect({connection:'google-oauth2'});
-      document.getElementById('auth-logout').onclick = () => auth0.logout({logoutParams:{returnTo:window.location.origin}});
+      document.getElementById('auth-login').onclick  = () =>
+        auth0.loginWithRedirect({connection:'google-oauth2'});
+
+      document.getElementById('auth-logout').onclick = () =>
+        auth0.logout({logoutParams:{returnTo:window.location.origin}});
     })();
   </script>
 </body>
