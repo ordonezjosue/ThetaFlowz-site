@@ -5,41 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ThetaFlowz</title>
 
+  <!-- ========  CSS  ========= -->
   <style>
     :root {
       --brand: #71f54a;
     }
-    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
-    body{background:#000;color:#fff;}
-    header{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;}
-    .logo{font-size:1.5rem;font-weight:700;}
-    nav ul{list-style:none;display:flex;gap:1.5rem;}
-    nav a{color:#fff;text-decoration:none;font-size:.95rem;}
-    .cta-button{background:var(--brand);color:#000;padding:.5rem 1rem;border:0;border-radius:8px;font-weight:700;cursor:pointer;}
-    .hero{padding:3rem 2rem;max-width:1000px;margin:auto;}
-    .hero h1{font-size:3rem;line-height:1.2;margin-bottom:1rem;}
-    .hero p{color:#ccc;font-size:1.2rem;max-width:600px;}
-    .buttons{margin-top:2rem;display:flex;gap:1rem;}
-    .primary{background:var(--brand);color:#000;border:0;padding:.75rem 1.5rem;border-radius:8px;font-weight:700;cursor:pointer;}
-    .secondary{background:transparent;color:#fff;border:2px solid #fff;padding:.75rem 1.5rem;border-radius:8px;font-weight:700;cursor:pointer;}
-    .image-strip{display:flex;overflow-x:auto;gap:1rem;padding:2rem;justify-content:center;}
-    .image-strip img{width:200px;border-radius:12px;}
-    footer{text-align:right;font-size:.8rem;color:#aaa;padding:1rem 2rem;}
-    @media(max-width:768px){
-      .hero h1{font-size:2.2rem}
-      .buttons{flex-direction:column;align-items:flex-start}
-      header{flex-direction:column;align-items:flex-start;gap:1rem}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    #auth-modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:1000;}
-    #auth-box{background:#111;padding:2rem 2.5rem;border-radius:12px;max-width:350px;width:90%;}
-    #auth-box h2{margin-bottom:1.5rem;text-align:center;}
-    #close-modal{position:absolute;top:1rem;right:1rem;font-size:1.2rem;background:none;border:none;color:#fff;cursor:pointer;}
+    body {
+      background: #000;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: .95rem;
+    }
+    .cta-button {
+      background: var(--brand);
+      color: #000;
+      padding: .5rem 1rem;
+      border: 0;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .hero {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      color: #ccc;
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .primary {
+      background: var(--brand);
+      color: #000;
+      border: 0;
+      padding: .75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: .75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .image-strip {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 2rem;
+      justify-content: center;
+    }
+    .image-strip img {
+      width: 200px;
+      border-radius: 12px;
+    }
+    footer {
+      text-align: right;
+      font-size: .8rem;
+      color: #aaa;
+      padding: 1rem 2rem;
+    }
+    @media(max-width:768px){
+      .hero h1 { font-size: 2.2rem; }
+      .buttons { flex-direction: column; align-items: flex-start; }
+      header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+    #auth-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #auth-box {
+      background: #111;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      max-width: 350px;
+      width: 90%;
+    }
+    #auth-box h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    #close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
   </style>
 
+  <!-- ========  Auth0 SDK  ========= -->
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.7/auth0-spa-js.production.js"></script>
 </head>
 
 <body>
+
+  <!-- ----------  NAV  ---------- -->
   <header>
     <div class="logo">🔥 ThetaFlowz</div>
     <nav>
@@ -53,6 +161,7 @@
     <button id="login-btn" class="cta-button">Log in</button>
   </header>
 
+  <!-- ----------  HERO  ---------- -->
   <section class="hero">
     <h1>Options made simple.<br>Wealth made possible.</h1>
     <p>Unlock easy-to-use screeners, trade tracking, and step-by-step guides. Learn how selling options can grow your confidence and your portfolio—no experience required.</p>
@@ -62,6 +171,7 @@
     </div>
   </section>
 
+  <!-- ----------  IMAGE STRIP  ---------- -->
   <section class="image-strip">
     <img src="img1.png" alt="Chart">
     <img src="img2.png" alt="Trading">
@@ -72,6 +182,7 @@
 
   <footer>Made by ThetaFlowz</footer>
 
+  <!-- ----------  LOGIN MODAL  ---------- -->
   <div id="auth-modal">
     <div id="auth-box">
       <button id="close-modal">✕</button>
@@ -81,7 +192,9 @@
     </div>
   </div>
 
+  <!-- ========  JS  ========= -->
   <script>
+    /* ----------  Modal open/close  ---------- */
     const modal    = document.getElementById('auth-modal');
     const openBtn  = document.getElementById('login-btn');
     const joinBtn  = document.getElementById('join-btn');
@@ -103,39 +216,40 @@
       if (e.target === modal) modal.style.display = 'none';
     };
 
+    /* ----------  Auth0 setup  ---------- */
     (async () => {
       const auth0 = await createAuth0Client({
-        domain: 'dev-x3psku6vr1bv763.us.auth0.com',
-        clientId: '648872271545-ld7l0dpehv71dj36bg00hfapv6mbk1.apps.googleusercontent.com',
+        domain: 'dev-x3spku6uvr1bv763.us.auth0.com',
+        clientId: '648872271545-lfd7ldopevh71dj36bg00hfapv6mbkl.apps.googleusercontent.com',
         authorizationParams: {
           redirect_uri: window.location.origin
         }
       });
 
+      // Handle redirect from Auth0
       if (window.location.search.includes('code=')) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, '/');
       }
 
+      // Update UI helpers
       const loginUI  = () => {
-        document.getElementById('auth-login').style.display  ='none';
-        document.getElementById('auth-logout').style.display ='block';
+        document.getElementById('auth-login').style.display  = 'none';
+        document.getElementById('auth-logout').style.display = 'block';
         openBtn.textContent = 'Dashboard';
       };
-
       const logoutUI = () => {
-        document.getElementById('auth-login').style.display  ='block';
-        document.getElementById('auth-logout').style.display ='none';
+        document.getElementById('auth-login').style.display  = 'block';
+        document.getElementById('auth-logout').style.display = 'none';
         openBtn.textContent = 'Log in';
       };
 
+      // Check auth state
       if (await auth0.isAuthenticated()) loginUI(); else logoutUI();
 
-      document.getElementById('auth-login').onclick  = () =>
-        auth0.loginWithRedirect({connection:'google-oauth2'});
-
-      document.getElementById('auth-logout').onclick = () =>
-        auth0.logout({logoutParams:{returnTo:window.location.origin}});
+      // Bind buttons
+      document.getElementById('auth-login').onclick  = () => auth0.loginWithRedirect({ connection: 'google-oauth2' });
+      document.getElementById('auth-logout').onclick = () => auth0.logout({ logoutParams: { returnTo: window.location.origin } });
     })();
   </script>
 </body>
