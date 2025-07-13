@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://cdn.auth0.com; connect-src 'self' https://dev-xx3psku6vr1bv763.us.auth0.com; style-src 'self' 'unsafe-inline';"
+          "value": "default-src 'self'; script-src 'self' https://cdn.auth0.com; connect-src 'self' https://dev-xx3psku6vr1bv763.us.auth0.com; style-src 'self' 'unsafe-inline'"
         }
       ]
     }
