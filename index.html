@@ -32,7 +32,7 @@
     #auth-box h2{margin-bottom:1.5rem;text-align:center;}
     #close-modal{position:absolute;top:1rem;right:1rem;font-size:1.2rem;background:none;border:none;color:#fff;cursor:pointer;}
   </style>
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.7/auth0-spa-js.production.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.7/auth0-spa-js.production.js" defer></script>
 </head>
 
 <body>
@@ -97,7 +97,7 @@
       closeBtn.onclick = () => modal.style.display = 'none';
       window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
 
-      const auth0 = await createAuth0Client({
+      const auth0 = await window.createAuth0Client({
         domain: "dev-xx3psku6vr1bv763.us.auth0.com",
         clientId: "MSJmDAsv2jxwafaszQa47QyMZndAEtLf",
         authorizationParams: {
