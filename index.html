@@ -32,8 +32,6 @@
     #auth-box h2{margin-bottom:1.5rem;text-align:center;}
     #close-modal{position:absolute;top:1rem;right:1rem;font-size:1.2rem;background:none;border:none;color:#fff;cursor:pointer;}
   </style>
-
-  <!-- ✅ Corrected Auth0 script -->
   <script src="https://cdn.auth0.com/js/auth0-spa-js/2.7/auth0-spa-js.production.js"></script>
 </head>
 
@@ -80,28 +78,27 @@
   </div>
 
   <script>
-    const modal    = document.getElementById('auth-modal');
-    const openBtn  = document.getElementById('login-btn');
-    const joinBtn  = document.getElementById('join-btn');
-    const closeBtn = document.getElementById('close-modal');
+    document.addEventListener("DOMContentLoaded", async () => {
+      const modal = document.getElementById('auth-modal');
+      const openBtn = document.getElementById('login-btn');
+      const joinBtn = document.getElementById('join-btn');
+      const closeBtn = document.getElementById('close-modal');
 
-    openBtn.onclick = () => {
-      document.querySelector('#auth-box h2').textContent = 'Sign in to ThetaFlowz';
-      modal.style.display = 'flex';
-    };
+      openBtn.onclick = () => {
+        document.querySelector('#auth-box h2').textContent = 'Sign in to ThetaFlowz';
+        modal.style.display = 'flex';
+      };
 
-    joinBtn.onclick = () => {
-      document.querySelector('#auth-box h2').textContent = 'Create your ThetaFlowz account';
-      modal.style.display = 'flex';
-    };
+      joinBtn.onclick = () => {
+        document.querySelector('#auth-box h2').textContent = 'Create your ThetaFlowz account';
+        modal.style.display = 'flex';
+      };
 
-    closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+      closeBtn.onclick = () => modal.style.display = 'none';
+      window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
 
-    // ✅ Auth0 integration
-    (async () => {
       const auth0 = await createAuth0Client({
-        domain:   "dev-xx3psku6vr1bv763.us.auth0.com",
+        domain: "dev-xx3psku6vr1bv763.us.auth0.com",
         clientId: "MSJmDAsv2jxwafaszQa47QyMZndAEtLf",
         authorizationParams: {
           redirect_uri: window.location.origin
@@ -113,18 +110,15 @@
         window.history.replaceState({}, document.title, '/');
       }
 
-      const loginUI  = () => {
+      if (await auth0.isAuthenticated()) {
         document.getElementById('auth-login').style.display = 'none';
         document.getElementById('auth-logout').style.display = 'block';
         openBtn.textContent = 'Dashboard';
-      };
-      const logoutUI = () => {
+      } else {
         document.getElementById('auth-login').style.display = 'block';
         document.getElementById('auth-logout').style.display = 'none';
         openBtn.textContent = 'Log in';
-      };
-
-      if (await auth0.isAuthenticated()) loginUI(); else logoutUI();
+      }
 
       document.getElementById("auth-login").addEventListener("click", async () => {
         console.log("Login button clicked");
@@ -137,10 +131,10 @@
         }
       });
 
-      document.getElementById('auth-logout').onclick = () => {
+      document.getElementById("auth-logout").addEventListener("click", () => {
         auth0.logout({ logoutParams: { returnTo: window.location.origin } });
-      };
-    })();
+      });
+    });
   </script>
 </body>
 </html>
