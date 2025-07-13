@@ -248,12 +248,14 @@
         }
 
         document.getElementById("auth-login").addEventListener("click", async () => {
-          try {
-            await auth0.loginWithRedirect({ connection: "google-oauth2" });
-          } catch (err) {
-            console.error("Login error:", err);
-          }
-        });
+  console.log("✅ Continue with Google clicked");
+  try {
+    await auth0.loginWithRedirect({ connection: "google-oauth2" });
+  } catch (err) {
+    console.error("❌ Login error:", err);
+  }
+});
+
 
         document.getElementById("auth-logout").addEventListener("click", () => {
           auth0.logout({ logoutParams: { returnTo: window.location.origin } });
