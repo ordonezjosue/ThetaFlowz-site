@@ -124,13 +124,19 @@
 
       if (await auth0.isAuthenticated()) loginUI(); else logoutUI();
 
-      document.getElementById('auth-login').onclick = () => {
-        auth0.loginWithRedirect({ connection: 'google-oauth2' });
-      };
+      // ✅ Updated Auth0 login logic
+      document.getElementById("auth-login").addEventListener("click", async () => {
+        console.log("Login button clicked");
+        await auth0.loginWithRedirect({
+          connection: "google-oauth2"
+        });
+      });
 
-      document.getElementById('auth-logout').onclick = () => {
-        auth0.logout({ logoutParams: { returnTo: window.location.origin } });
-      };
+      document.getElementById("auth-logout").addEventListener("click", () => {
+        auth0.logout({
+          logoutParams: { returnTo: window.location.origin }
+        });
+      });
     })();
   </script>
 </body>
