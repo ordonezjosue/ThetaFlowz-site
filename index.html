@@ -194,7 +194,6 @@
 
   <!-- ========  JS  ========= -->
   <script>
-    /* ----------  Modal open/close  ---------- */
     const modal    = document.getElementById('auth-modal');
     const openBtn  = document.getElementById('login-btn');
     const joinBtn  = document.getElementById('join-btn');
@@ -226,30 +225,31 @@
         }
       });
 
-      // Handle redirect from Auth0
       if (window.location.search.includes('code=')) {
         await auth0.handleRedirectCallback();
         window.history.replaceState({}, document.title, '/');
       }
 
-      // Update UI helpers
-      const loginUI  = () => {
-        document.getElementById('auth-login').style.display  = 'none';
+      const loginUI = () => {
+        document.getElementById('auth-login').style.display = 'none';
         document.getElementById('auth-logout').style.display = 'block';
         openBtn.textContent = 'Dashboard';
       };
       const logoutUI = () => {
-        document.getElementById('auth-login').style.display  = 'block';
+        document.getElementById('auth-login').style.display = 'block';
         document.getElementById('auth-logout').style.display = 'none';
         openBtn.textContent = 'Log in';
       };
 
-      // Check auth state
       if (await auth0.isAuthenticated()) loginUI(); else logoutUI();
 
-      // Bind buttons
-      document.getElementById('auth-login').onclick  = () => auth0.loginWithRedirect({ connection: 'google-oauth2' });
-      document.getElementById('auth-logout').onclick = () => auth0.logout({ logoutParams: { returnTo: window.location.origin } });
+      document.getElementById('auth-login').onclick = () => {
+        auth0.loginWithRedirect({ connection: 'google-oauth2' });
+      };
+
+      document.getElementById('auth-logout').onclick = () => {
+        auth0.logout({ logoutParams: { returnTo: window.location.origin } });
+      };
     })();
   </script>
 </body>
