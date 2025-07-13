@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ThetaFlowz</title>
 
-  <!-- ✅ Auth0 SDK with defer -->
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
-
   <style>
     :root { --brand: #71f54a; }
     * {
@@ -189,6 +186,8 @@
     </div>
   </div>
 
+  <!-- ✅ Load Auth0 SDK right before our script -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
   <script>
     console.log("🧠 JS script loaded!");
 
@@ -220,12 +219,12 @@
           if (e.key === "Escape") modal.style.display = 'none';
         });
 
-        if (typeof createAuth0Client !== 'function') {
+        if (typeof window.createAuth0Client !== 'function') {
           console.error("❌ Auth0 SDK still didn't load.");
           return;
         }
 
-        const auth0 = await createAuth0Client({
+        const auth0 = await window.createAuth0Client({
           domain: "dev-xx3psku6vr1bv763.us.auth0.com",
           clientId: "MSJmDAsv2jxwafaszQa47QyMZndAEtLf",
           authorizationParams: {
