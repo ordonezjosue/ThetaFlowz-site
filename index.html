@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ThetaFlowz</title>
+
+  <!-- ✅ Load Auth0 SDK directly -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+
   <style>
     :root { --brand: #71f54a; }
     * {
@@ -186,18 +190,8 @@
   </div>
 
   <script>
-    const loadAuth0 = () => new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = "https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js";
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-
     document.addEventListener("DOMContentLoaded", async () => {
       try {
-        await loadAuth0();
-
         const modal = document.getElementById('auth-modal');
         const openBtn = document.getElementById('login-btn');
         const joinBtn = document.getElementById('join-btn');
@@ -220,7 +214,7 @@
         });
 
         if (typeof createAuth0Client !== 'function') {
-          console.error("Auth0 SDK failed to load.");
+          console.error("Auth0 SDK still didn't load.");
           return;
         }
 
@@ -248,14 +242,13 @@
         }
 
         document.getElementById("auth-login").addEventListener("click", async () => {
-  console.log("✅ Continue with Google clicked");
-  try {
-    await auth0.loginWithRedirect({ connection: "google-oauth2" });
-  } catch (err) {
-    console.error("❌ Login error:", err);
-  }
-});
-
+          console.log("✅ Continue with Google clicked");
+          try {
+            await auth0.loginWithRedirect({ connection: "google-oauth2" });
+          } catch (err) {
+            console.error("❌ Login error:", err);
+          }
+        });
 
         document.getElementById("auth-logout").addEventListener("click", () => {
           auth0.logout({ logoutParams: { returnTo: window.location.origin } });
