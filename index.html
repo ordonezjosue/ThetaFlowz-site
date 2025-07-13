@@ -32,6 +32,7 @@
     #auth-box h2{margin-bottom:1.5rem;text-align:center;}
     #close-modal{position:absolute;top:1rem;right:1rem;font-size:1.2rem;background:none;border:none;color:#fff;cursor:pointer;}
   </style>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
 </head>
 
 <body>
@@ -72,4 +73,79 @@
     <div id="auth-box">
       <button id="close-modal">✕</button>
       <h2>Sign in to ThetaFlowz</h2>
-      <button id="au
+      <button id="auth-login" class="primary" style="width:100%;margin-bottom:.75rem;">Continue with Google</button>
+      <button id="auth-logout" class="secondary" style="width:100%;display:none;">Log out</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const modal = document.getElementById('auth-modal');
+      const openBtn = document.getElementById('login-btn');
+      const joinBtn = document.getElementById('join-btn');
+      const closeBtn = document.getElementById('close-modal');
+
+      openBtn.onclick = () => {
+        document.querySelector('#auth-box h2').textContent = 'Sign in to ThetaFlowz';
+        modal.style.display = 'flex';
+      };
+
+      joinBtn.onclick = () => {
+        document.querySelector('#auth-box h2').textContent = 'Create your ThetaFlowz account';
+        modal.style.display = 'flex';
+      };
+
+      closeBtn.onclick = () => modal.style.display = 'none';
+      window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+
+      const auth0 = await window.createAuth0Client({
+        domain: "dev-xx3psku6vr1bv763.us.auth0.com",
+        clientId: "MSJmDAsv2jxwafaszQa47QyMZndAEtLf",
+        authorizationParams: {
+          redirect_uri: window.location.origin
+        }
+      });
+
+      if (window.location.search.includes('code=')) {
+        await auth0.handleRedirectCallback();
+        window.history.replaceState({}, document.title, '/');
+      }
+
+      if (await auth0.isAuthenticated()) {
+        document.getElementById('auth-login').style.display = 'none';
+        document.getElementById('auth-logout').style.display = 'block';
+        openBtn.textContent = 'Dashboard';
+      } else {
+        document.getElementById('auth-login').style.display = 'block';
+        document.getElementById('auth-logout').style.display = 'none';
+        openBtn.textContent = 'Log in';
+      }
+
+      document.getElementById("auth-login").addEventListener("click", async () => {
+        console.log("Login button clicked");
+        try {
+          await auth0.loginWithRedirect({
+            connection: "google-oauth2"
+          });
+        } catch (err) {
+          console.error("Login error:", err);
+        }
+      });
+
+      document.getElementById("auth-logout").addEventListener("click", () => {
+        auth0.logout({ logoutParams: { returnTo: window.location.origin } });
+      });
+
+      document.getElementById("test-google-login").addEventListener("click", async (e) => {
+        e.preventDefault();
+        console.log("Test Google Login link clicked");
+        try {
+          await auth0.loginWithRedirect({ connection: "google-oauth2" });
+        } catch (err) {
+          console.error("Test login error:", err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
