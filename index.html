@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ThetaFlowz</title>
 
-  <!-- ✅ Load Auth0 SDK directly -->
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <!-- ✅ Load Auth0 SDK correctly with defer -->
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
 
   <style>
     :root { --brand: #71f54a; }
@@ -238,35 +238,4 @@
         } else {
           document.getElementById('auth-login').style.display = 'block';
           document.getElementById('auth-logout').style.display = 'none';
-          openBtn.textContent = 'Log in';
-        }
-
-        document.getElementById("auth-login").addEventListener("click", async () => {
-          console.log("✅ Continue with Google clicked");
-          try {
-            await auth0.loginWithRedirect({ connection: "google-oauth2" });
-          } catch (err) {
-            console.error("❌ Login error:", err);
-          }
-        });
-
-        document.getElementById("auth-logout").addEventListener("click", () => {
-          auth0.logout({ logoutParams: { returnTo: window.location.origin } });
-        });
-
-        document.getElementById("test-google-login").addEventListener("click", async (e) => {
-          e.preventDefault();
-          try {
-            await auth0.loginWithRedirect({ connection: "google-oauth2" });
-          } catch (err) {
-            console.error("Test login error:", err);
-          }
-        });
-
-      } catch (err) {
-        console.error("Error initializing authentication:", err);
-      }
-    });
-  </script>
-</body>
-</html>
+          openBtn.tex
