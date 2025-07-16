@@ -1,86 +1,37 @@
-console.log("main.js loaded");
+// main.js
 
-(async () => {
-  console.log("DOM ready");
+let auth0 = null;
 
-  const modal = document.getElementById("auth-modal");
-  const authLogin = document.getElementById("auth-login");
-  const authLogout = document.getElementById("auth-logout");
-  const loginBtn = document.getElementById("login-btn");
-  const joinBtn = document.getElementById("join-btn");
-  const closeBtn = document.getElementById("close-modal");
-
-  if (!window.createAuth0Client) {
-    console.error("❌ Auth0 SDK not loaded");
-    return;
-  }
-
-  const auth0 = await window.createAuth0Client({
-    domain: "dev-xx3psku6vr1bv763.us.auth0.com",
-    clientId: "MSJmDAsv2jxwafaszQa47QyMZndAEtLf",
-    authorizationParams: { redirect_uri: window.location.origin }
+// Initialize Auth0 client
+async function initAuth0() {
+  auth0 = await createAuth0Client({
+    domain: "YOUR_DOMAIN",
+    client_id: "YOUR_CLIENT_ID",
+    cacheLocation: "localstorage", // optional
   });
+}
 
-  // Handle redirect callback
-  if (window.location.search.includes("code=")) {
-    await auth0.handleRedirectCallback();
-    window.history.replaceState({}, document.title, "/");
-  }
+function showModal(show) {
+  document.getElementById('auth-modal').style.display = show ? 'flex' : 'none';
+}
 
-  const updateUI = async () => {
-    const isAuth = await auth0.isAuthenticated();
-    if (isAuth) {
-      loginBtn.textContent = "Dashboard";
-      authLogin.style.display = "none";
-      authLogout.style.display = "block";
-    } else {
-      loginBtn.textContent = "Log in";
-      authLogin.style.display = "block";
-      authLogout.style.display = "none";
-    }
-  };
+document.getElementById('login-btn').onclick = () => showModal(true);
+document.getElementById('join-btn').onclick = () => showModal(true);
+document.getElementById('close-modal').onclick = () => showModal(false);
 
-  updateUI();
-
-  const showModal = (title) => {
-    document.querySelector("#auth-box h2").textContent = title;
-    modal.style.display = "flex";
-  };
-
-  joinBtn?.addEventListener("click", () => {
-    console.log("Join button clicked");
-    showModal("Create your ThetaFlowz account");
+document.getElementById('auth-login').onclick = async () => {
+  await auth0.loginWithRedirect({
+    redirect_uri: window.location.origin,
+    // connection: "google-oauth2", // Uncomment to force Google login
   });
+};
 
-  loginBtn?.addEventListener("click", () => {
-    console.log("Login button clicked");
-    showModal("Sign in to ThetaFlowz");
+document.getElementById('auth-logout').onclick = async () => {
+  await auth0.logout({
+    returnTo: window.location.origin,
   });
+};
 
-  closeBtn?.addEventListener("click", () => modal.style.display = "none");
-  window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
-  document.addEventListener("keydown", e => { if (e.key === "Escape") modal.style.display = 'none'; });
-
-  authLogin?.addEventListener("click", async () => {
-    console.log("Continue with Google clicked");
-    try {
-      await auth0.loginWithRedirect({ connection: "google-oauth2" });
-    } catch (err) {
-      console.error("Login error:", err);
-    }
-  });
-
-  authLogout?.addEventListener("click", () => {
-    auth0.logout({ logoutParams: { returnTo: window.location.origin } });
-  });
-
-  document.getElementById("test-google-login").addEventListener("click", async (e) => {
-    e.preventDefault();
-    console.log("Test login clicked");
-    try {
-      await auth0.loginWithRedirect({ connection: "google-oauth2" });
-    } catch (err) {
-      console.error("Test login error:", err);
-    }
-  });
-})();
+// Handle redirect after login
+window.onload = async () => {
+  await initAuth0
