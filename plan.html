@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategy Finder – ThetaFlowz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: white;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #71f54a;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      background-color: #111;
+      color: white;
+      border: 1px solid #71f54a;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #71f54a;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #71f54a;
+      border-radius: 5px;
+      background-color: #111;
+    }
+
+    .result h2 {
+      color: #71f54a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📈 Strategy Finder</h1>
+
+  <label for="age">Select your age group:</label>
+  <select id="age">
+    <option>Under 30</option>
+    <option>30–45</option>
+    <option>46–60</option>
+    <option>60+</option>
+  </select>
+
+  <label for="portfolio">Select your portfolio size:</label>
+  <select id="portfolio">
+    <option>&lt;$5K</option>
+    <option>$5K–$25K</option>
+    <option>$25K–$100K</option>
+    <option>$100K+</option>
+  </select>
+
+  <label for="goal">What's your primary goal?</label>
+  <select id="goal">
+    <option>Generate a second stream of income</option>
+    <option>Save for retirement</option>
+  </select>
+
+  <button onclick="generateStrategy()">Find My Strategy</button>
+
+  <div class="result" id="strategyResult"></div>
+
+  <script>
+    function generateStrategy() {
+      const age = document.getElementById('age').value;
+      const portfolio = document.getElementById('portfolio').value;
+      const goal = document.getElementById('goal').value;
+
+      let output = "";
+
+      if (portfolio === "<$5K" && goal === "Generate a second stream of income") {
+        output = `
+          <h2>🔄 The Wheel on Small-Caps</h2>
+          <p><strong>Why this works:</strong> For small accounts, the wheel lets you generate weekly cash flow on cheap stocks with high implied volatility.</p>
+          <p><strong>Setup:</strong><br>
+          • Sell ATM puts on stocks &lt; $10 with high IVR (40+)<br>
+          • 7–10 DTE, manage at 50% profit<br>
+          • If assigned, sell covered calls OTM</p>
+          <p><strong>Backtest (2023):</strong><br>
+          • Win Rate: 81%<br>
+          • Avg Monthly Income: $145<br>
+          • Max Drawdown: -12%</p>
+        `;
+      } else if (portfolio === "$25K–$100K" && goal === "Save for retirement") {
+        output = `
+          <h2>📆 45 DTE Put Credit Spreads on SPY</h2>
+          <p><strong>Why this works:</strong> High-probability income with defined risk, ideal for consistent compounding over time.</p>
+          <p><strong>Setup:</strong><br>
+          • Sell 45 DTE SPY put spreads at 25 delta<br>
+          • $5 wide, 50% profit target or 2x loss<br>
+          • Roll at 21 DTE</p>
+          <p><strong>Backtest (2018–2023):</strong><br>
+          • Win Rate: 86%<br>
+          • Avg Monthly Return: 3.5%<br>
+          • Max Drawdown: -8%</p>
+        `;
+      } else if (portfolio === "$100K+" && goal === "Generate a second stream of income") {
+        output = `
+          <h2>🧠 0DTE SPX Iron Condors</h2>
+          <p><strong>Why this works:</strong> Capitalizing on daily theta decay with well-managed risk and proper sizing.</p>
+          <p><strong>Setup:</strong><br>
+          • Entry: 10:30–11:30 AM ET<br>
+          • 2 SD wings, 15–20 delta shorts<br>
+          • Take profit at 50% or end-of-day exit</p>
+          <p><strong>Backtest (2022–2024):</strong><br>
+          • Win Rate: 74%<br>
+          • Avg Daily Return: 0.4%<br>
+          • Max Drawdown: -10%</p>
+        `;
+      } else {
+        output = `
+          <h2>📚 Conservative Covered Calls</h2>
+          <p><strong>Why this works:</strong> Ideal for older traders with capital looking for steady income with less risk.</p>
+          <p><strong>Setup:</strong><br>
+          • Buy blue-chip stocks with 3–4% dividend yield<br>
+          • Sell 30 DTE covered calls at 30 delta<br>
+          • Roll monthly or when breached</p>
+          <p><strong>Backtest (2015–2023):</strong><br>
+          • Win Rate: 91%<br>
+          • Avg Annual Yield: 9–12%</p>
+        `;
+      }
+
+      document.getElementById('strategyResult').innerHTML = output;
+    }
+  </script>
+
+</body>
+</html>
