@@ -2,113 +2,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personalized Options Strategy Builder</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategy Builder – ThetaFlowz</title>
+  <link rel="stylesheet" href="styles.css" />
   <style>
     body {
-      background: #0d0d0d;
+      background: #000;
       color: #fff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar-form {
+      width: 30%;
+      background: #111;
+      padding: 2rem;
+      border-right: 2px solid #222;
+    }
+    .main-intro {
+      flex-grow: 1;
       padding: 2rem;
     }
-    h1, h2, h3 {
+    h1 {
       color: #71f54a;
     }
-    select, button {
+    label, select, button {
+      display: block;
       width: 100%;
-      padding: 0.6rem;
       margin-bottom: 1rem;
-      border: 1px solid #71f54a;
-      border-radius: 5px;
-      background-color: #111;
+    }
+    select {
+      background: #000;
       color: #fff;
+      border: 1px solid #71f54a;
+      padding: 0.5rem;
     }
     button {
       background-color: #71f54a;
       color: #000;
       font-weight: bold;
+      border: none;
+      padding: 1rem;
       cursor: pointer;
     }
-    .layout {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
+    .main-intro h2 {
+      margin-top: 0;
+      color: #fff;
     }
-    .sidebar {
-      width: 25%;
-      background: #111;
-      padding: 1rem;
-      border: 1px solid #333;
-      border-radius: 10px;
-    }
-    .content {
-      width: 75%;
-      background: #111;
-      padding: 2rem;
-      border: 1px solid #333;
-      border-radius: 10px;
+    .main-intro p {
+      color: #ccc;
     }
     a {
-      color: #4dcfff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+      color: #71f54a;
     }
   </style>
 </head>
 <body>
-  <h1>📊 Personalized Options Strategy Builder</h1>
+  <div class="container">
+    <div class="sidebar-form">
+      <h1>📊 Personalized Options Strategy Builder</h1>
+      <label for="age">What’s your age group?</label>
+      <select id="age">
+        <option value="under30">Under 30</option>
+        <option value="30to50">30–50</option>
+        <option value="over50">Over 50</option>
+      </select>
 
-  <label>What’s your age group?</label>
-  <select id="age">
-    <option value="u30">Under 30</option>
-    <option value="30s">30–39</option>
-    <option value="40s">40–49</option>
-    <option value="50s">50–59</option>
-    <option value="60p">60+</option>
-  </select>
+      <label for="portfolio">Portfolio size?</label>
+      <select id="portfolio">
+        <option value="lt5k">&lt;$5K</option>
+        <option value="5kto25k">$5K–$25K</option>
+        <option value="gt25k">&gt;$25K</option>
+      </select>
 
-  <label>Portfolio size?</label>
-  <select id="portfolio">
-    <option value="lt5k">&lt;$5K</option>
-    <option value="5to25k">$5K–$25K</option>
-    <option value="25to100k">$25K–$100K</option>
-    <option value="gt100k">&gt;$100K</option>
-  </select>
+      <label for="goal">Primary objective?</label>
+      <select id="goal">
+        <option value="income">Generate a second stream of income</option>
+        <option value="retirement">Save for retirement</option>
+      </select>
 
-  <label>Primary objective?</label>
-  <select id="goal">
-    <option value="income">Generate a second stream of income</option>
-    <option value="retire">Grow wealth for retirement</option>
-  </select>
+      <label for="volatilityComfort">Comfort with market swings?</label>
+      <select id="volatilityComfort">
+        <option value="low">I want minimal ups and downs</option>
+        <option value="medium">I’m okay with moderate fluctuations</option>
+        <option value="high">I’m comfortable with risk if the reward is higher</option>
+      </select>
 
-  <label>Comfort with market swings?</label>
-  <select id="volatilityComfort">
-    <option value="low">I want minimal ups and downs</option>
-    <option value="medium">Some volatility is okay</option>
-    <option value="high">I’m fine with big swings</option>
-  </select>
+      <label for="timeHorizon">Investment time horizon?</label>
+      <select id="timeHorizon">
+        <option value="short">0–3 years</option>
+        <option value="medium">3–10 years</option>
+        <option value="long">10+ years</option>
+      </select>
 
-  <label>Investment time horizon?</label>
-  <select id="timeHorizon">
-    <option value="short">0–3 years</option>
-    <option value="medium">3–10 years</option>
-    <option value="long">10+ years</option>
-  </select>
+      <label for="panicResponse">What would you do in a market crash?</label>
+      <select id="panicResponse">
+        <option value="sell">Sell everything and stop</option>
+        <option value="wait">Wait it out and reassess</option>
+        <option value="buy">Buy more at a discount</option>
+      </select>
 
-  <label>What would you do in a market crash?</label>
-  <select id="panicResponse">
-    <option value="sell">Sell everything and stop</option>
-    <option value="wait">Wait it out</option>
-    <option value="buy">Buy more at a discount</option>
-  </select>
-
-  <button id="buildPlanBtn">Build My Plan</button>
-
-  <div id="fullRecommendation"></div>
-
+      <button id="buildPlanBtn">Build My Plan</button>
+    </div>
+    <div class="main-intro">
+      <h2>📈 Welcome to Your Strategy Builder</h2>
+      <p>This tool will guide you through building a custom options trading plan based on your financial situation, goals, and comfort with market volatility. Whether you're a complete beginner or just looking for structure, you'll get:</p>
+      <ul>
+        <li>A tailored options strategy suited to your profile</li>
+        <li>Guided steps on how to execute it</li>
+        <li>Stock screening tips using tools like <a href="https://finviz.com" target="_blank">Finviz</a></li>
+        <li>Helpful links to learn more: <a href="https://tastytrade.com" target="_blank">Tastytrade</a>, <a href="https://www.investopedia.com/options-basics-tutorial-4583012" target="_blank">Investopedia</a></li>
+      </ul>
+      <p>Once you're done filling out the form on the left, hit <strong>Build My Plan</strong> to get started.</p>
+      <div id="fullRecommendation"></div>
+    </div>
+  </div>
   <script src="plan.js"></script>
 </body>
 </html>
