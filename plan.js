@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (riskLevel <= 6) riskProfile = "Moderate";
     else riskProfile = "Aggressive";
 
-    // Strategy logic
     let strategy = "";
     let screening = "";
 
@@ -97,13 +96,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("fullRecommendation").innerHTML = `
       <h2>📋 Your Custom Strategy Plan</h2>
-      <p><strong>Age Group:</strong> ${document.getElementById("age").options[document.getElementById("age").selectedIndex].text}</p>
-      <p><strong>Portfolio:</strong> ${document.getElementById("portfolio").options[document.getElementById("portfolio").selectedIndex].text}</p>
-      <p><strong>Goal:</strong> ${document.getElementById("goal").options[document.getElementById("goal").selectedIndex].text}</p>
+      <p><strong>Age Group:</strong> ${document.getElementById("age").selectedOptions[0].text}</p>
+      <p><strong>Portfolio:</strong> ${document.getElementById("portfolio").selectedOptions[0].text}</p>
+      <p><strong>Goal:</strong> ${document.getElementById("goal").selectedOptions[0].text}</p>
       <p><strong>Risk Profile:</strong> ${riskProfile}</p>
       ${strategy}
       <br />
       ${screening}
     `;
   });
-}
+});
