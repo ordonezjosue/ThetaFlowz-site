@@ -14,6 +14,7 @@
 
     h1 {
       color: #71f54a;
+      margin-top: 3rem;
     }
 
     label {
@@ -21,7 +22,7 @@
       margin-top: 1rem;
     }
 
-    select, button {
+    select, button, input {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.5rem;
@@ -48,6 +49,11 @@
 
     .result h2 {
       color: #71f54a;
+    }
+
+    hr {
+      margin: 3rem 0;
+      border: 1px solid #333;
     }
   </style>
 </head>
@@ -78,8 +84,35 @@
   </select>
 
   <button id="findStrategyBtn">Find My Strategy</button>
-
   <div class="result" id="strategyResult"></div>
+
+  <hr />
+
+  <h1>🧠 Risk Tolerance Profiler</h1>
+
+  <label for="volatilityComfort">How comfortable are you with portfolio fluctuations?</label>
+  <select id="volatilityComfort">
+    <option value="low">I want minimal ups and downs</option>
+    <option value="medium">I can handle moderate swings</option>
+    <option value="high">I’m okay with big moves to chase gains</option>
+  </select>
+
+  <label for="timeHorizon">What's your investment time horizon?</label>
+  <select id="timeHorizon">
+    <option value="short">0–3 years</option>
+    <option value="medium">3–10 years</option>
+    <option value="long">10+ years</option>
+  </select>
+
+  <label for="panicResponse">What would you do in a market crash?</label>
+  <select id="panicResponse">
+    <option value="sell">Sell to protect myself</option>
+    <option value="wait">Wait it out</option>
+    <option value="buy">Buy more at a discount</option>
+  </select>
+
+  <button id="riskBtn">Analyze My Risk Profile</button>
+  <div class="result" id="riskResult"></div>
 
   <script src="plan.js"></script>
 </body>
