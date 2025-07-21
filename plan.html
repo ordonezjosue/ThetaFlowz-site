@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Strategy Finder – ThetaFlowz</title>
+  <title>Strategy Builder – ThetaFlowz</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,7 +14,6 @@
 
     h1 {
       color: #71f54a;
-      margin-top: 3rem;
     }
 
     label {
@@ -22,7 +21,7 @@
       margin-top: 1rem;
     }
 
-    select, button, input {
+    select, button {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.5rem;
@@ -37,6 +36,7 @@
       color: black;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 2rem;
     }
 
     .result {
@@ -50,18 +50,13 @@
     .result h2 {
       color: #71f54a;
     }
-
-    hr {
-      margin: 3rem 0;
-      border: 1px solid #333;
-    }
   </style>
 </head>
 <body>
 
-  <h1>📈 Strategy Finder</h1>
+  <h1>📊 Personalized Options Strategy Builder</h1>
 
-  <label for="age">Select your age group:</label>
+  <label for="age">What’s your age group?</label>
   <select id="age">
     <option value="under_30">Under 30</option>
     <option value="30_45">30–45</option>
@@ -69,7 +64,7 @@
     <option value="60_plus">60+</option>
   </select>
 
-  <label for="portfolio">Select your portfolio size:</label>
+  <label for="portfolio">Portfolio size?</label>
   <select id="portfolio">
     <option value="lt5k">&lt;$5K</option>
     <option value="5k_25k">$5K–$25K</option>
@@ -77,27 +72,20 @@
     <option value="100k_plus">$100K+</option>
   </select>
 
-  <label for="goal">What's your primary goal?</label>
+  <label for="goal">Primary objective?</label>
   <select id="goal">
     <option value="income">Generate a second stream of income</option>
     <option value="retirement">Save for retirement</option>
   </select>
 
-  <button id="findStrategyBtn">Find My Strategy</button>
-  <div class="result" id="strategyResult"></div>
-
-  <hr />
-
-  <h1>🧠 Risk Tolerance Profiler</h1>
-
-  <label for="volatilityComfort">How comfortable are you with portfolio fluctuations?</label>
+  <label for="volatilityComfort">Comfort with market swings?</label>
   <select id="volatilityComfort">
     <option value="low">I want minimal ups and downs</option>
     <option value="medium">I can handle moderate swings</option>
     <option value="high">I’m okay with big moves to chase gains</option>
   </select>
 
-  <label for="timeHorizon">What's your investment time horizon?</label>
+  <label for="timeHorizon">Investment time horizon?</label>
   <select id="timeHorizon">
     <option value="short">0–3 years</option>
     <option value="medium">3–10 years</option>
@@ -111,8 +99,9 @@
     <option value="buy">Buy more at a discount</option>
   </select>
 
-  <button id="riskBtn">Analyze My Risk Profile</button>
-  <div class="result" id="riskResult"></div>
+  <button id="buildPlanBtn">Build My Plan</button>
+
+  <div class="result" id="fullRecommendation"></div>
 
   <script src="plan.js"></script>
 </body>
